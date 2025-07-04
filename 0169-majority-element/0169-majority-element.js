@@ -2,15 +2,18 @@
  * @param {number[]} nums
  * @return {number}
  */
+
 var majorityElement = function (nums) {
-    let countMap = {};
-    let majorityCount = Math.floor(nums.length / 2);
-    for (let i = 0; i < nums.length; i++) {
-        if (nums[i] in countMap) {
-            countMap[nums[i]]++;
-        } else {
-            countMap[nums[i]] = 1;
+    // improved Boyer-Moore Voting Algorithm
+    let count = 0;
+    let candidate = null;
+
+    for (let num of nums) {
+        if (count === 0) {
+            candidate = num;
         }
-        if (countMap[nums[i]] > majorityCount) return nums[i];
+        count += (num === candidate) ? 1 : -1;
     }
+
+    return candidate;
 };
