@@ -4,32 +4,30 @@
  * @return {number[]}
  */
 var topKFrequent = function (nums, k) {
-    let map = {}
-    let bucket = []
-    let result = []
+    let map = {};
+    let bucket = [];
+    let result = [];
 
-    // Count Frequencies
     for (let i = 0; i < nums.length; i++) {
-        if (map[nums[i]]) {
-            map[nums[i]] += 1
+        if (!map[nums[i]]) {
+            map[nums[i]] = 1;
         } else {
-            map[nums[i]] = 1
+            map[nums[i]]++;
         }
     }
 
-    // Organizing Numbers by Frequency
     for (let [num, freq] of Object.entries(map)) {
         if (!bucket[freq]) {
-            bucket[freq] = new Set().add(Number(num))
+            bucket[freq] = new Set().add(Number(num));
         } else {
-            bucket[freq] = bucket[freq].add(Number(num))
+            bucket[freq] = bucket[freq].add(Number(num));
         }
     }
-    
-    // Collecting the Top K Frequent Elements
+
     for (let i = bucket.length - 1; i >= 0; i--) {
-        if (bucket[i]) result.push(...bucket[i])
+        if (bucket[i]) result.push(...bucket[i]);
         if (result.length === k) break;
     }
+
     return result
 };
