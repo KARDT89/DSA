@@ -3,33 +3,21 @@
  * @return {boolean}
  */
 var isValidSudoku = function (board) {
-    const rows = board
-    // Check rows
-    for (row of rows) {
-        const filteredRow = row.filter(num => num !== ".")
-        if (new Set(filteredRow).size !== filteredRow.length) return false
-    }
+    let rows = new Array(9).fill().map(() => new Set());
+    let cols = new Array(9).fill().map(() => new Set());
+    let squares = new Array(9).fill().map(() => new Set());
 
-    const subBoxes = {}
-    for (let i = 0; i < 9; i++) {
-        let col = []
-        for (let j = 0; j < 9; j++) {
-            const cell = board[i][j]
-
-            if (cell === '.') continue;
-            // Check column
-            col.push(cell)
-
-            // Check 3x3 sub-box
-            const boxIndex = 3 * Math.floor(i / 3) + Math.floor(j / 3)
-            if (!subBoxes[boxIndex]) {
-                subBoxes[boxIndex] = [cell]
-            } else {
-                if (subBoxes[boxIndex].find((num) => num === cell)) return false;
-                subBoxes[boxIndex].push(cell)
+    for (let r = 0; r < 9; r++) {
+        for (let c = 0; c < 9; c++) {
+            let squareIndex = Math.floor(r / 3) * 3 + Math.floor(c / 3);
+            if (board[r][c] === '.') continue;
+            if (rows[r].has(board[r][c]) || cols[c].has(board[r][c]) || squares[squareIndex].has(board[r][c])) {
+                return false // found duplicate
             }
+            rows[r].add(board[r][c])
+            cols[c].add(board[r][c])
+            squares[squareIndex].add(board[r][c])
         }
-        if (new Set(col).size !== col.length) return false
-    }
-    return true
+    } 
+    return true // All good
 };
