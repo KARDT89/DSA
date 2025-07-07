@@ -2,29 +2,29 @@
  * @param {string} s
  * @return {boolean}
  */
-var isPalindrome = function (s) {
-    let cleanedString = clean(s)
-    return isPal(cleanedString)
+var isPalindrome = function(s) {
+    let cleanedStr = cleanStr(s)
+    return checkPalindrome(cleanedStr)
 };
 
-function clean(str) {
-    let char = 'abcdefghijklmnopqrstuvwxyz0123456789'
-    let newStr = ''
-
-    for (let i = 0; i < str.length; i++) {
-        if (char.indexOf(str[i].toLowerCase()) !== -1) {
-            newStr += str[i].toLowerCase()
+function cleanStr(s){
+    let str = 'abcdefghijklmnopqrstuvwxyz0123456789'
+    let cleanedStr = ''
+    for(let i=0;i<s.length;i++){
+        if(str.includes(s[i].toLowerCase())){
+            cleanedStr+=s[i].toLowerCase()
         }
-    } return newStr
+    }
+    return cleanedStr
 }
 
-function isPal(str) {
+function checkPalindrome(s){
     let left = 0
-    let right = str.length - 1
-    while (left < right) {
-        if (str[left] !== str[right]) return false
+    let right = s.length - 1
+    while(left < right){
+        if(s[left] !== s[right]) return false
         left++
         right--
-    } return true
+    }
+    return true
 }
-
