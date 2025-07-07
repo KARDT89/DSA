@@ -28,4 +28,3 @@ function isPal(str) {
     } return true
 }
 
-
