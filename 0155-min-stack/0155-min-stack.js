@@ -1,5 +1,5 @@
 
-var MinStack = function() {
+var MinStack = function () {
     this.stack = []
     this.minStack = []
 };
@@ -8,36 +8,35 @@ var MinStack = function() {
  * @param {number} val
  * @return {void}
  */
-MinStack.prototype.push = function(val) {
+MinStack.prototype.push = function (val) {
     this.stack.push(val)
-    if(this.minStack.length === 0){
-        min = val
-    }else{
-        min = Math.min(val, this.minStack[this.minStack.length - 1])
+    if (this.minStack.length === 0 || val <= this.minStack.at(-1)) {
+        this.minStack.push(val)
     }
-    this.minStack.push(min)
 };
 
 /**
  * @return {void}
  */
-MinStack.prototype.pop = function() {
+MinStack.prototype.pop = function () {
+    if (this.stack.at(-1) === this.minStack.at(-1)) {
+        this.minStack.pop()
+    }
     this.stack.pop()
-    this.minStack.pop()
 };
 
 /**
  * @return {number}
  */
-MinStack.prototype.top = function() {
-    return this.stack[this.stack.length - 1]
+MinStack.prototype.top = function () {
+    return this.stack.at(-1)
 };
 
 /**
  * @return {number}
  */
-MinStack.prototype.getMin = function() {
-    return this.minStack[this.minStack.length - 1]
+MinStack.prototype.getMin = function () {
+    return this.minStack.at(-1)
 };
 
 /** 
