@@ -4,31 +4,24 @@
  * @return {boolean}
  */
 var isAnagram = function (s, t) {
-    // edge case
     if (s.length !== t.length) return false
-
-    // the container
-    let hashMap = {}
-
-    // loop through s and store it in container
+    let hash = {}
+    // Count characters in s
     for (let i = 0; i < s.length; i++) {
-        let letter = s[i]
-        if (!hashMap[letter]) {
-            hashMap[letter] = 1
+        if (hash[s[i]]) {
+            hash[s[i]]++;
         } else {
-            hashMap[letter]++
+            hash[s[i]] = 1;
         }
     }
-
-    // loop through t and check in container if the current letter is present.
-    // If present, decrease the count. U get the point. EZ
-    for (let j = 0; j < t.length; j++) {
-        let letter = t[j]
-        if (hashMap[letter] === undefined) return false
-        if (hashMap[letter] < 1) return false
-        hashMap[letter]--
+    // Subtract using t
+    for (let i = 0; i < t.length; i++) {
+        if (!hash[t[i]]) {
+            return false;
+        }
+        hash[t[i]]--;
     }
 
-    return true
-
+    return true;
+    
 };
