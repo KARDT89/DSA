@@ -3,25 +3,19 @@
  * @param {string} t
  * @return {boolean}
  */
-var isAnagram = function (s, t) {
-    if (s.length !== t.length) return false
-    let hash = {}
-    // Count characters in s
+var isAnagram = function(s, t) {
+    if (s.length !== t.length) return false;
+
+    const hash = {};
+
     for (let i = 0; i < s.length; i++) {
-        if (hash[s[i]]) {
-            hash[s[i]]++;
-        } else {
-            hash[s[i]] = 1;
-        }
+        hash[s[i]] = (hash[s[i]] || 0) + 1;
+        hash[t[i]] = (hash[t[i]] || 0) - 1;
     }
-    // Subtract using t
-    for (let i = 0; i < t.length; i++) {
-        if (!hash[t[i]]) {
-            return false;
-        }
-        hash[t[i]]--;
+
+    for (const key in hash) {
+        if (hash[key] !== 0) return false;
     }
 
     return true;
-    
 };
