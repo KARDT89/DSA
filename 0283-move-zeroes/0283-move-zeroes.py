@@ -3,8 +3,10 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        slow = 0
-        for fast in range(len(nums)):
-            if nums[fast] != 0:
-                nums[fast], nums[slow] = nums[slow], nums[fast]
-                slow+=1
+        aux = [0] * len(nums)
+        write = 0
+        for i in range(len(nums)):
+            if nums[i] != 0:
+                aux[write] = nums[i]
+                write+=1
+        nums[:] = aux
