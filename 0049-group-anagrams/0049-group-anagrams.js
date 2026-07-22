@@ -2,15 +2,16 @@
  * @param {string[]} strs
  * @return {string[][]}
  */
-var groupAnagrams = function(strs) {
-    let prevMap = {}
-   
-    for(let i=0; i<strs.length; i++){
-        let sorted = strs[i].split("").sort().join()
-        if(sorted in prevMap){
-            prevMap[sorted].push(strs[i])
-        }else{
-            prevMap[sorted] = [strs[i]]
-        } 
-    } return Object.values(prevMap)
+var groupAnagrams = function (strs) {
+    const groups = {}
+
+    for(const str of strs){
+        const sig = str.split("").sort().join("")
+
+        if(!groups[sig]) groups[sig] = []
+
+        groups[sig].push(str)
+    }
+
+    return Object.values(groups)
 };
