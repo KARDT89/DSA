@@ -4,14 +4,13 @@
  * @return {number[]}
  */
 var twoSum = function (nums, target) {
-    let seen = {}
+    let hash = {}
     for (let i = 0; i < nums.length; i++) {
-        let need = target - nums[i]
-        if (need in seen) {
-            return [seen[need], i]
+        let required = target - nums[i]
+        if (required in hash) {
+            return [hash[required], i]
         } else {
-            seen[nums[i]] = i
+            hash[nums[i]] = i
         }
     }
-    return null
 };
